@@ -3,15 +3,18 @@ package com.develhope.carproject.models;
 import com.develhope.carproject.enums.Color;
 import com.develhope.carproject.enums.Type;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true)
+    @NotNull
     private Integer id;
 
-    @Column(length = 40, nullable = false)
+    @Column(name = "model_name",length = 40, nullable = false)
     private String modelName;
 
     public Type getType() {
@@ -20,6 +23,14 @@ public class Car {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public Car(Integer id, String modelName, Type type, Color color, String description) {
+        this.id = id;
+        this.modelName = modelName;
+        this.type = type;
+        this.color = color;
+        this.description = description;
     }
 
     public Integer getId() {

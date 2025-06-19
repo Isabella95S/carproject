@@ -18,12 +18,12 @@ public class CarController {
     @Autowired
     CarRepository carRepository;
 
-    public Page<Car> findAll(@RequestParam(required = false, defaultValue = "0") Integer pageNumber,
-                             @RequestParam(required = false, defaultValue = "10") Integer pageSize){
-
-    }
-    Pageable pageable = PageRequest.of(pageNumber, pageSize);
-    return carRepository.findAll(pageble);
+//    public Page<Car> findAll(@RequestParam(required = false, defaultValue = "0") Integer pageNumber,
+//                             @RequestParam(required = false, defaultValue = "10") Integer pageSize){
+//
+//    }
+//    Pageable pageable = PageRequest.of(pageNumber, pageSize);
+//    return carRepository.findAll(pageble);
 
 
 }
