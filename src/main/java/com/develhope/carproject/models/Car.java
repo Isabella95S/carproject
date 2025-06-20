@@ -10,11 +10,12 @@ public class Car {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true)
-    @NotNull
+    @Column(name = "id")
+
     private Integer id;
 
     @Column(name = "model_name",length = 40, nullable = false)
+    @NotNull
     private String modelName;
 
     public Type getType() {
@@ -25,12 +26,16 @@ public class Car {
         this.type = type;
     }
 
-    public Car(Integer id, String modelName, Type type, Color color, String description) {
-        this.id = id;
+    public Car(String modelName, Type type, Color color, String description) {
+
         this.modelName = modelName;
         this.type = type;
         this.color = color;
         this.description = description;
+    }
+
+    public Car( String modelName, Type type, Color color) {
+        this(modelName,type,color, null);
     }
 
     public Integer getId() {
@@ -73,7 +78,7 @@ public class Car {
     @Enumerated(EnumType.STRING)
     private Color color;
 
-    @Column(length = 250, nullable = true)
+    @Column(name= "descr",length = 2500, nullable = true)
     private String description;
 
 }
