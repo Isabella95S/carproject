@@ -18,13 +18,16 @@ public class Car {
     @NotNull
     private String modelName;
 
-    public Type getType() {
-        return type;
-    }
+    @Column(length = 30, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Type type;
 
-    public void setType(Type type) {
-        this.type = type;
-    }
+    @Column(length = 20, nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Color color;
+
+    @Column(name= "descr",length = 2500, nullable = true)
+    private String description;
 
     public Car(String modelName, Type type, Color color, String description) {
 
@@ -38,47 +41,51 @@ public class Car {
         this(modelName,type,color, null);
     }
 
-    public Integer getId() {
-        return id;
+    private Car(){ //per far costruire gli oggetti a JPA
+
+    }
+    public Color getColor() {
+        return color;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+
+    public Type getType() {
+        return type;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getModelName() {
         return modelName;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public void setModelName(String modelName) {
         this.modelName = modelName;
     }
 
-    public Color getColor() {
-        return color;
-    }
 
     public void setColor(Color color) {
         this.color = color;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    @Column(length = 30, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Type type;
-
-    @Column(length = 20, nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Color color;
-
-    @Column(name= "descr",length = 2500, nullable = true)
-    private String description;
 
 }
