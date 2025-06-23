@@ -30,23 +30,23 @@ public class CarController {
         return carRepository.save(car);
     }
 
-//    @GetMapping("/{id}")
-//    public Car findById(@PathVariable Integer id){  //ricerca dell'auto tramite l'id
-//        Optional<Car> optionalCar = carRepository.findById(id);
-//        if (optionalCar.isEmpty()){
-//            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
-//        }
-//        return optionalCar.get();
-//    }
-
     @GetMapping("/{id}")
-    public Car findById(@PathVariable Integer id){
-        if (!carRepository.existsById(id)){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Auto con id " + id + " non trovata");
+    public Car findById(@PathVariable Integer id){  //ricerca dell'auto tramite l'id
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if (optionalCar.isEmpty()){
+            throw new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
-        return carRepository.findById(id).get();
+        return optionalCar.get();
     }
-//    @PostMapping("/updateType/{id}")
+
+//    @GetMapping("/{id}")
+//    public Car findById(@PathVariable Integer id){
+//        if (!carRepository.existsById(id)){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Auto con id " + id + " non trovata");
+//        }
+//        return carRepository.findById(id).get();
+//    }
+////    @PostMapping("/updateType/{id}")
 //    public Car updateType(@PathVariable Integer id,@RequestBody Car carInput){
 //        Optional<Car> optionalCar = carRepository.findById(id);
 //        if(optionalCar.isPresent()){
