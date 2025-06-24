@@ -46,30 +46,30 @@ public class CarController {
 //        }
 //        return carRepository.findById(id).get();
 //    }
-////    @PostMapping("/updateType/{id}")
-//    public Car updateType(@PathVariable Integer id,@RequestBody Car carInput){
-//        Optional<Car> optionalCar = carRepository.findById(id);
-//        if(optionalCar.isPresent()){
-//            Car risultato = optionalCar.get();
-//            risultato.setType(carInput.getType());
-//
-//            return risultato;
-//
-//        }else{
-//            throw  new ResponseStatusException(HttpStatusCode.valueOf(404));
-//        }
-//    }
+//    @PostMapping("/updateType/{id}")
+    public Car updateType(@PathVariable Integer id,@RequestBody Car carInput){  //versione del metodo più conveniente, poiché scrivo meno codice e faccio due cose in una
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if(optionalCar.isPresent()){
+            Car risultato = optionalCar.get();
+            risultato.setType(carInput.getType());
 
-    @PostMapping("/updateType/{id}")
-    public Car updateType(@PathVariable Integer id, @RequestBody Car carInput){
-        if (!carRepository.existsById(id)){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Auto con id " + id + " non trovata");
+            return carRepository.save(risultato);
 
+        }else{
+            throw  new ResponseStatusException(HttpStatusCode.valueOf(404));
         }
-        Car car = carRepository.findById(id).get();
-        car.setType(carInput.getType());
-        return carRepository.save(car);
     }
+
+//    @PostMapping("/updateType/{id}")
+//    public Car updateType(@PathVariable Integer id, @RequestBody Car carInput){
+//        if (!carRepository.existsById(id)){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Auto con id " + id + " non trovata");
+//
+//        }
+//        Car car = carRepository.findById(id).get();
+//        car.setType(carInput.getType());
+//        return carRepository.save(car);
+//    }
     @DeleteMapping("/delete/{id}")
     public String deleteById(@PathVariable Integer id) {
         if(carRepository.existsById(id)) {
