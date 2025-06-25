@@ -5,5 +5,13 @@ public enum Color {
     BLU,
     NERO,
     BIANCO,
-    ROSSO
+    ROSSO,
+    GIALLO_SCURO,
+    BIANCO_AVORIO,
+    ARANCIONE_METALLIZZATO,
+    VERDE_SMERALDO,
+    AZZURRO,
+    GRIGIO_TOPO,
+    VIOLA
+
 }

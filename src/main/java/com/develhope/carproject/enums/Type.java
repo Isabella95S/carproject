@@ -1,8 +1,11 @@
 package com.develhope.carproject.enums;
 
-public enum Type {
+public enum CarType {
     UTILITARIA,
     SPORTIVA,
     SPIDER,
-    FUORISTRADA
+    FUORISTRADA,
+    FAMILIARE,
+    BERLINA,
+    COUPE
 }
