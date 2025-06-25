@@ -4,4 +4,21 @@ INSERT INTO car (id, model_name, type, color, descr) VALUES
 (3,'Toyota_Aygo','utilitaria','bianco','giapponese,veloce,design dinamico'),
 (4,'Fiat_124','spider','rosso','usata,prima serie, si trova nelle Marche'),
 (5,'Audi TT','spider','bianco','nuova, ecosostenibile, design accattivante'),
-(6,'Jeep_Renegade','fuoristrada','nero','resistente agli urti, vecole, italiana, ecosostenibile');
+(6,'Jeep_Renegade','fuoristrada','giallo_scuro','resistente agli urti, vecole, italiana, ecosostenibile');
+(7,'Jeep_Renegade','fuoristrada','arancione_metallizzato','resistente agli urti, vecole, italiana, ecosostenibile');
+8,'Jeep_Renegade','fuoristrada','verde_smeraldo','resistente agli urti, vecole, italiana, ecosostenibile');
+9,'Jeep_Renegade','fuoristrada','azzurro','resistente agli urti, vecole, italiana, ecosostenibile');
+10,'Jeep_Renegade','fuoristrada','bianco_avorio','resistente agli urti, vecole, italiana, ecosostenibile');
+(11,'Jeep_Renegade','fuoristrada','blu','resistente agli urti, vecole, italiana, ecosostenibile');
+(12,'Jeep_Renegade','fuoristrada','nero','resistente agli urti, vecole, italiana, ecosostenibile');
+13,'Jeep_Renegade','fuoristrada','blu','resistente agli urti, vecole, italiana, ecosostenibile');
+14,'Jeep_Renegade','fuoristrada','grigio_topo','resistente agli urti, vecole, italiana, ecosostenibile');
+15,'Jeep_Renegade','fuoristrada','viola','resistente agli urti, vecole, italiana, ecosostenibile');
+16,'Jeep_Renegade','fuoristrada','giallo_scuro','resistente agli urti, vecole, italiana, ecosostenibile');
+17,'Jeep_Renegade','fuoristrada','rosso','resistente agli urti, vecole, italiana, ecosostenibile');
+18,'Jeep_Renegade','fuoristrada','nero','resistente agli urti, vecole, italiana, ecosostenibile');
+19,'Jeep_Renegade','fuoristrada','nero','resistente agli urti, vecole, italiana, ecosostenibile');
+20,'Jeep_Renegade','fuoristrada','nero','resistente agli urti, vecole, italiana, ecosostenibile');
+21,'Jeep_Renegade','fuoristrada','nero','resistente agli urti, vecole, italiana, ecosostenibile');
+22,'Jeep_Renegade','fuoristrada','nero','resistente agli urti, vecole, italiana, ecosostenibile');
+23,'Jeep_Renegade','fuoristrada','nero','resistente agli urti, vecole, italiana, ecosostenibile');
