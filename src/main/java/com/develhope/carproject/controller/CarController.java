@@ -1,10 +1,9 @@
 package com.develhope.carproject.controller;
 
 
-import com.develhope.carproject.enums.CarType;
 import com.develhope.carproject.models.Car;
 import com.develhope.carproject.repository.CarRepository;
-import jakarta.annotation.Nullable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.PageRequest;
@@ -23,11 +22,11 @@ public class CarController {
     @Autowired
     CarRepository carRepository;
 
-    @GetMapping
-    public List<Car> carList(){
-
-        return carRepository.findAll();
-    }
+//    @GetMapping
+//    public List<Car> carList(){
+//
+//        return carRepository.findAll();
+//    }
     @PostMapping("/create")
     public Car createCar(@RequestBody Car car){  //creazione di un'auto
         return carRepository.save(car);

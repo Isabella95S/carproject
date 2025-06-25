@@ -30,15 +30,18 @@ public class Car {
     @Column(name= "descr",length = 2500, nullable = true)
     private String description;
 
-    public Car(String modelName, CarType type, Color color, String description) {
+
+
+
+    public Car(String modelName, CarType carType, Color color, String description) {
 
         this.modelName = modelName;
-        this.carType = type;
+        this.carType = carType;
         this.color = color;
         this.description = description;
     }
 
-    public Car( String modelName, CarType carType, Color color) {
+    public Car(String modelName, CarType carType, Color color) {
         this(modelName,carType,color, null);
     }
 
@@ -48,12 +51,6 @@ public class Car {
     public Color getColor() {
         return color;
     }
-
-
-    public CarType getCarType() {
-        return carType;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -65,10 +62,10 @@ public class Car {
     public String getDescription() {
         return description;
     }
-
-    public void setCarType(CarType carType) {
-        this.carType = carType;
+    public CarType getCarType() {
+        return carType;
     }
+
 
 
     public void setId(Integer id) {
@@ -88,5 +85,7 @@ public class Car {
         this.description = description;
     }
 
-
+    public void setCarType(CarType carType) {
+        this.carType = carType;
+    }
 }
