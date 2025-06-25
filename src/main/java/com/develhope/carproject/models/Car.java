@@ -2,7 +2,7 @@ package com.develhope.carproject.models;
 
 import com.develhope.carproject.enums.CarType;
 import com.develhope.carproject.enums.Color;
-;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
