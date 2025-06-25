@@ -1,10 +1,13 @@
 package com.develhope.carproject.controller;
 
 
+import com.develhope.carproject.enums.CarType;
 import com.develhope.carproject.models.Car;
 import com.develhope.carproject.repository.CarRepository;
+import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +42,8 @@ public class CarController {
         return optionalCar.get();
     }
 
+//    @GetMapping("/paginated")
+//    public  List<Car>
 //    @GetMapping("/{id}")
 //    public Car findById(@PathVariable Integer id){
 //        if (!carRepository.existsById(id)){
@@ -51,7 +56,7 @@ public class CarController {
         Optional<Car> optionalCar = carRepository.findById(id);
         if(optionalCar.isPresent()){
             Car risultato = optionalCar.get();
-            risultato.setType(carInput.getType());
+            risultato.setCarType(carInput.getCarType());
 
             return carRepository.save(risultato);
 
@@ -84,6 +89,18 @@ public class CarController {
     carRepository.deleteAll();
     return " OK";
     }
+
+    @GetMapping("/paginated")
+    public List<Car> getCars(@RequestParam String modelName,  @RequestParam int page,  @RequestParam int size){
+        if(!modelName.isBlank()){
+            List<Car> carList = carRepository.findByModelNameContaining(modelName, PageRequest.of(page,size));
+            return carList;
+        }else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
 
 //    public List<Car> carList findAll(@RequestParam(required = false, defaultValue = "0") Integer pageNumber,
 //                             @RequestParam(required = false, defaultValue = "10") Integer pageSize) {

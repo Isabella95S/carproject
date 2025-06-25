@@ -1,7 +1,8 @@
 package com.develhope.carproject.models;
 
+import com.develhope.carproject.enums.CarType;
 import com.develhope.carproject.enums.Color;
-import com.develhope.carproject.enums.Type;
+;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -20,7 +21,7 @@ public class Car {
 
     @Column(length = 30, nullable = false)
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private CarType carType;
 
     @Column(length = 20, nullable = false)
     @Enumerated(EnumType.STRING)
@@ -29,16 +30,16 @@ public class Car {
     @Column(name= "descr",length = 2500, nullable = true)
     private String description;
 
-    public Car(String modelName, Type type, Color color, String description) {
+    public Car(String modelName, CarType type, Color color, String description) {
 
         this.modelName = modelName;
-        this.type = type;
+        this.carType = type;
         this.color = color;
         this.description = description;
     }
 
-    public Car( String modelName, Type type, Color color) {
-        this(modelName,type,color, null);
+    public Car( String modelName, CarType carType, Color color) {
+        this(modelName,carType,color, null);
     }
 
     private Car(){ //per far costruire gli oggetti a JPA
@@ -49,8 +50,8 @@ public class Car {
     }
 
 
-    public Type getType() {
-        return type;
+    public CarType getCarType() {
+        return carType;
     }
 
     public Integer getId() {
@@ -65,8 +66,8 @@ public class Car {
         return description;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setCarType(CarType carType) {
+        this.carType = carType;
     }
 
 

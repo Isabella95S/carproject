@@ -1,13 +1,18 @@
 package com.develhope.carproject.repository;
 
-import com.develhope.carproject.enums.Type;
+import com.develhope.carproject.enums.CarType;
+
 import com.develhope.carproject.models.Car;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface CarRepository extends JpaRepository<Car,Integer> {
 
-    List<Car>findBymodelName(String modelName);
-    List<Car>findBytype(Type type);
+    List<Car>findByModelNameContaining(String modelName, Pageable pageable);
+    List<Car>findByType(CarType carType);
+
+
 }
