@@ -1,14 +1,19 @@
 package com.develhope.carproject.controller;
 
 
+import com.develhope.carproject.dto.APIResponse;
 import com.develhope.carproject.models.Car;
 import com.develhope.carproject.repository.CarRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,8 +33,8 @@ public class CarController {
 //        return carRepository.findAll();
 //    }
     @PostMapping("/create")
-    public Car createCar(@RequestBody Car car){  //creazione di un'auto
-        return carRepository.save(car);
+    public ResponseEntity<Car> createCar(@RequestBody Car car){  //creazione di un'auto
+        return ResponseEntity.ok(carRepository.save(car));
     }
 
     @GetMapping("/{id}")
@@ -50,7 +55,7 @@ public class CarController {
 //        }
 //        return carRepository.findById(id).get();
 //    }
-//    @PostMapping("/updateType/{id}")
+    @PostMapping("/updateType/{id}")
     public Car updateType(@PathVariable Integer id,@RequestBody Car carInput){  //versione del metodo più conveniente, poiché scrivo meno codice e faccio due cose in una
         Optional<Car> optionalCar = carRepository.findById(id);
         if(optionalCar.isPresent()){
@@ -75,24 +80,24 @@ public class CarController {
 //        return carRepository.save(car);
 //    }
     @DeleteMapping("/delete/{id}")
-    public String deleteById(@PathVariable Integer id) {
-        if(carRepository.existsById(id)) {
-            carRepository.deleteById(id);
-            return " OK";
-        }else{
-            throw  new ResponseStatusException(HttpStatusCode.valueOf(404), "Id non valido, auto non trovata ");
+    public ResponseEntity<Void> deleteById(@PathVariable Integer id) {
+        if (!carRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+
         }
+        carRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/deleteAll")
-    public String deleteAll(){
-    carRepository.deleteAll();
-    return " OK";
+    public ResponseEntity<Void> deleteAll(){
+        carRepository.deleteAll();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/paginated")
-    public List<Car> getCars(@RequestParam String modelName,  @RequestParam int page,  @RequestParam int size){
+    public Page<Car> getCars(@RequestParam String modelName, @RequestParam Integer pageNumber, @RequestParam Integer pageSize){
         if(!modelName.isBlank()){
-            List<Car> carList = carRepository.findByModelNameContaining(modelName, PageRequest.of(page,size));
+            Page<Car> carList = carRepository.findByModelNameContaining(modelName, PageRequest.of(pageNumber,pageSize));
             return carList;
         }else{
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -100,11 +105,17 @@ public class CarController {
 
     }
 
+    public ResponseEntity<APIResponse> searchByType(@RequestParam String carType,
+                                                    @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
+                                                    @RequestParam(required = false, defaultValue = "10") Integer pageSize,
+                                                    @RequestParam(required = false, defaultValue = "ASC") String sortDir){
+        Sort sort = sortDir.equalsIgnoreCase("DESC") ? Sort.by("carType").descending()
+                : Sort.by("carType").ascending();
 
-//    public List<Car> carList findAll(@RequestParam(required = false, defaultValue = "0") Integer pageNumber,
-//                             @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-//
-//        if (pageNumber < 0) {
-//
-//    }
+        Pageable pageable = PageRequest.of(pageNumber,pageSize,sort);
+        Page<Car> car = carRepository.findByTypeContains(carType, pageable);
+
+        return ResponseEntity.ok(new APIResponse(car));
+    }
+
 }
