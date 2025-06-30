@@ -5,7 +5,7 @@ public enum CarType {
     SPORTIVA,
     SPIDER,
     FUORISTRADA,
-    FAMILIARE,
+    MONOVOLUME,
     BERLINA,
     COUPE
 }

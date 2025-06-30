@@ -55,19 +55,19 @@ public class CarController {
 //        }
 //        return carRepository.findById(id).get();
 //    }
-    @PostMapping("/updateType/{id}")
-    public Car updateType(@PathVariable Integer id,@RequestBody Car carInput){  //versione del metodo più conveniente, poiché scrivo meno codice e faccio due cose in una
-        Optional<Car> optionalCar = carRepository.findById(id);
-        if(optionalCar.isPresent()){
-            Car risultato = optionalCar.get();
-            risultato.setCarType(carInput.getCarType());
+@PostMapping("/updateType/{id}")
+public Car updateType(@PathVariable Integer id,@RequestBody Car carInput){  //versione del metodo più conveniente, poiché scrivo meno codice e faccio due cose in una
+    Optional<Car> optionalCar = carRepository.findById(id);
+    if(optionalCar.isPresent()){
+        Car risultato = optionalCar.get();
+        risultato.setCarType(carInput.getCarType());
 
-            return carRepository.save(risultato);
+        return carRepository.save(risultato);
 
-        }else{
-            throw  new ResponseStatusException(HttpStatusCode.valueOf(404));
-        }
+    }else{
+        throw  new ResponseStatusException(HttpStatusCode.valueOf(404));
     }
+}
 
 //    @PostMapping("/updateType/{id}")
 //    public Car updateType(@PathVariable Integer id, @RequestBody Car carInput){
@@ -104,8 +104,8 @@ public class CarController {
         }
 
     }
-
-    public ResponseEntity<APIResponse> searchByType(@RequestParam String carType,
+    @GetMapping("/search")
+    public ResponseEntity<Page<Car>> searchByType(@RequestParam String carType,
                                                     @RequestParam(required = false, defaultValue = "0") Integer pageNumber,
                                                     @RequestParam(required = false, defaultValue = "10") Integer pageSize,
                                                     @RequestParam(required = false, defaultValue = "ASC") String sortDir){
@@ -113,9 +113,9 @@ public class CarController {
                 : Sort.by("carType").ascending();
 
         Pageable pageable = PageRequest.of(pageNumber,pageSize,sort);
-        Page<Car> car = carRepository.findByTypeContains(carType, pageable);
+        Page<Car> car = carRepository.findByTypeContainsIgnoreCase( carType + "%", pageable );
 
-        return ResponseEntity.ok(new APIResponse(car));
+        return ResponseEntity.ok(car);
     }
 
 }
