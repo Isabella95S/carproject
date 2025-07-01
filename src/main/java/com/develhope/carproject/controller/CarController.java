@@ -113,7 +113,7 @@ public Car updateType(@PathVariable Integer id,@RequestBody Car carInput){  //ve
                 : Sort.by("carType").ascending();
 
         Pageable pageable = PageRequest.of(pageNumber,pageSize,sort);
-        Page<Car> car = carRepository.findByTypeContainsIgnoreCase( carType + "%", pageable );
+        Page<Car> car = carRepository.findByTypeContainsIgnoreCase( carType + "%", pageable );  //
 
         return ResponseEntity.ok(car);
     }
